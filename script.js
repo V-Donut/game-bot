@@ -10,8 +10,22 @@ const isNumber = function (num) {
 
 function startGame() {
   let randomNumber = getRandomInRange(1, 100);
+  let attempts = 10;
+
+  function gameOver(text) {
+    let continueGame = confirm(text);
+      if (continueGame) {
+        return startGame();
+      } 
+      alert('Игра окончена');
+      return;
+  }
 
   function askNumber(question) {
+    if (attempts === 0) {
+      return gameOver('Попытки закончились, хотите сыграть еще?');
+    }
+
     let userNumber = prompt(question);
 
     if (userNumber === null) {
@@ -24,14 +38,14 @@ function startGame() {
     }
 
     userNumber = parseInt(userNumber);
+    attempts--;
 
     if (randomNumber === userNumber) {
-      alert('Поздравляю, Вы угадали!!!');
-      return;
+      return gameOver('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?');
     } else if (randomNumber > userNumber) {
-      return askNumber('Загаданное число больше');
+      return askNumber('Загаданное число больше, осталось попыток ' + attempts);
     } else {
-      return askNumber('Загаданное число меньше');
+      return askNumber('Загаданное число меньше, осталось попыток ' + attempts);
     }
   }
 

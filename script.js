@@ -14,11 +14,11 @@ function startGame() {
 
   function gameOver(text) {
     let continueGame = confirm(text);
-      if (continueGame) {
-        return startGame();
-      } 
-      alert('Игра окончена');
-      return;
+    if (continueGame) {
+      return startGame();
+    } 
+    alert('Игра окончена');
+    return;
   }
 
   function askNumber(question) {
